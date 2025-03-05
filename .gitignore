@@ -1,0 +1,26 @@
+# 🐍 Python/Django
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+/media/
+/staticfiles/
+*.log
+
+# 🔄 Git
+.DS_Store
+*.swp
+.vscode/
+
+# 📦 Node.js/Next.js
+node_modules/
+.next/
+out/
+package-lock.json
+yarn.lock
+
+# 🔐 Credenciales y Configs
+.env
+config.json
