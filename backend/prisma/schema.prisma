@@ -1,0 +1,164 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserAccount {
+  id               Int        @id @default(autoincrement())
+  name             String
+  email            String     @unique
+  password         String
+  phone            String?
+  address          String?
+  registrationDate DateTime   @default(now())
+  role             String     @default("customer") @db.VarChar(20)
+  candles          Candle[]
+  subscriptions    Subscription[]
+  orders          OrderTable[]
+}
+
+model Container {
+  id          Int      @id @default(autoincrement())
+  name        String
+  material    String
+  description String?
+  candles     Candle[]
+}
+
+model Fragrance {
+  id                Int        @id @default(autoincrement())
+  name              String
+  description       String?
+  associatedColor   String?
+  candles           Candle[]
+  subscriptions     Subscription[]
+  moodFragrances    Mood_Fragrance[]
+}
+
+model Mood {
+  id              Int             @id @default(autoincrement())
+  name            String
+  description     String?
+  moodFragrances Mood_Fragrance[]
+}
+
+model Mood_Fragrance {
+  moodId       Int
+  fragranceId  Int
+  mood         Mood       @relation(fields: [moodId], references: [id])
+  fragrance    Fragrance  @relation(fields: [fragranceId], references: [id])
+
+  @@id([moodId, fragranceId])
+}
+
+model Candle {
+  id           Int        @id @default(autoincrement())
+  userId       Int
+  containerId  Int?
+  fragranceId  Int?
+  message      String?
+  imageUrl     String?
+  videoUrl     String?
+  audioUrl     String?
+  creationDate DateTime   @default(now())
+  
+  user        UserAccount @relation(fields: [userId], references: [id])
+  container   Container?  @relation(fields: [containerId], references: [id])
+  fragrance   Fragrance?  @relation(fields: [fragranceId], references: [id])
+  orderCandles Order_Candle[]
+}
+
+model Subscription {
+  id              Int       @id @default(autoincrement())
+  userId          Int       @unique
+  preferredFragranceId Int?
+  frequency       String    @db.VarChar(20)
+  startDate       DateTime  @default(now())
+
+  user             UserAccount @relation(fields: [userId], references: [id])
+  preferredFragrance Fragrance? @relation(fields: [preferredFragranceId], references: [id])
+}
+
+model Discount {
+  id             Int      @id @default(autoincrement())
+  code           String   @unique
+  percentage     Decimal
+  expirationDate DateTime?
+  orders         OrderTable[]
+}
+
+model OrderTable {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  discountId  Int?
+  status      String    @db.VarChar(20)
+  total       Decimal
+  orderDate   DateTime  @default(now())
+
+  user        UserAccount @relation(fields: [userId], references: [id])
+  discount    Discount?   @relation(fields: [discountId], references: [id])
+  candles     Order_Candle[]
+  complements Order_Complement[]
+  payments    Payment[]
+  history     Order_History[]
+}
+
+model Payment {
+  id            Int       @id @default(autoincrement())
+  orderId       Int
+  paymentMethod String    @db.VarChar(50)
+  paymentStatus String    @db.VarChar(20)
+  paymentDate   DateTime  @default(now())
+
+  order        OrderTable @relation(fields: [orderId], references: [id])
+}
+
+model Order_History {
+  id            Int       @id @default(autoincrement())
+  orderId       Int
+  previousStatus String?
+  newStatus     String?
+  changeDate    DateTime  @default(now())
+
+  order        OrderTable @relation(fields: [orderId], references: [id])
+}
+
+model Order_Candle {
+  orderId   Int
+  candleId  Int
+  quantity  Int
+
+  order     OrderTable @relation(fields: [orderId], references: [id])
+  candle    Candle     @relation(fields: [candleId], references: [id])
+
+  @@id([orderId, candleId])
+}
+
+model Complement {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+  price       Decimal
+  orders      Order_Complement[]
+}
+
+model Order_Complement {
+  orderId      Int
+  complementId Int
+  quantity     Int
+
+  order        OrderTable  @relation(fields: [orderId], references: [id])
+  complement   Complement  @relation(fields: [complementId], references: [id])
+
+  @@id([orderId, complementId])
+}

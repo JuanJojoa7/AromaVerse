@@ -1,26 +1,33 @@
-# 🐍 Python/Django
-env/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-db.sqlite3
-/media/
-/staticfiles/
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+
+# Prisma
+prisma/.env
+prisma/migrations/
+
+# Logs
+logs/
 *.log
 
-# 🔄 Git
-.DS_Store
-*.swp
+# Database files
+*.sqlite
+*.sqlite-journal
+
+# Firebase
+.firebase/
+serviceAccountKey.json
+
+# Build files
+dist/
+coverage/
+
+# IDE and OS files
 .vscode/
-
-# 📦 Node.js/Next.js
-node_modules/
-.next/
-out/
-package-lock.json
-yarn.lock
-
-# 🔐 Credenciales y Configs
-.env
-config.json
+.idea/
+.DS_Store
+Thumbs.db
