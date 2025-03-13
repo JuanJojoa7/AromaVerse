@@ -1,68 +1,86 @@
-# AromaVerse
+# AromaVerse Backend
 
-AromaVerse es una aplicación web de personalización de velas para **Velas Aromalife**, donde los clientes pueden crear velas a su medida combinando IA, experiencias sensoriales y opciones de compra flexibles.
+Este es el backend del proyecto **AromaVerse**, una plataforma para la venta de velas aromáticas. Está desarrollado con **Node.js**, **Express**, **PostgreSQL** y **Prisma ORM**, e integra **Firebase Authentication** para la gestión de usuarios.
 
-## 🚀 Características Principales
-- **Personalización completa:** Elección de contenedor, fragancia y diseño de etiqueta.  
-- **Generación con IA:** Imágenes, mensajes y audios personalizados según emociones.  
-- **Previsualización 2D:** Permite ver la vela en una imagen de su espacio.  
-- **Playlists en QR:** Sugiere fragancias y genera playlists en Spotify según el mensaje.  
-- **Suscripción mensual:** Envió de velas personalizadas según gustos.  
-- **Upselling inteligente:** Recomendaciones de chocolates, flores y más.  
-- **Integración con redes:** Compartir creaciones en Instagram, TikTok, Facebook y YouTube.  
-- **Pasarelas de pago:** MercadoPago y PayU para compras seguras.  
+## 🚀 Tecnologías
 
----
+- **Node.js** con **Express** (Framework backend)
+- **PostgreSQL** con **Prisma ORM** (Base de datos y ORM)
+- **Firebase Authentication** (Autenticación de usuarios)
+- **Firebase Storage** (Almacenamiento de imágenes)
+- **MercadoPago / PayU** (Pasarelas de pago)
+- **Docker** (Opcional para despliegue)
 
-## 🛠️ Tecnologías Utilizadas
-### **Backend**
-- **Django + DRF** (API REST segura y escalable)  
-- **PostgreSQL** (Base de datos robusta)  
-- **Firebase Auth** (Autenticación rápida y segura)  
-- **AWS S3 / Firebase Storage** (Almacenamiento de imágenes)  
-- **Integraciones IA:** OpenAI (textos), Stable Diffusion (imágenes), ElevenLabs (audio)  
+## 📂 Estructura del Proyecto
 
-### **Frontend**
-- **React + Next.js** (SSR y rendimiento optimizado)  
-- **TailwindCSS** (Diseño moderno y rápido)  
-- **Redux Toolkit** (Manejo de estado eficiente)  
-- **Three.js** (Previsualización de velas en 2D)  
-
-### **Infraestructura y Deploy**
-- **Render** (Backend y base de datos gratis)  
-- **Vercel** (Frontend optimizado y rápido)  
-- **Firebase** (Autenticación y almacenamiento)  
-- **QR Code API** (Generación automática de códigos QR)  
-
----
-
-## 📦 Instalación y Configuración
-### **1️⃣ Clonar el repositorio**
-```bash
-git clone https://github.com/tu-usuario/aromaverse.git
-cd aromaverse
+```
+backend/
+│-- prisma/          # Esquema de la base de datos y migraciones
+│-- src/
+│   │-- controllers/ # Lógica de negocio
+│   │-- middleware/  # Middlewares para validaciones y seguridad
+│   │-- models/      # Modelos de la base de datos con Prisma
+│   │-- routes/      # Definición de rutas con Express
+│   │-- services/    # Servicios para conectar con Firebase y otros
+│   │-- app.js       # Configuración de Express
+│   └-- server.js    # Punto de entrada del backend
+│-- .env             # Variables de entorno
+│-- .gitignore       # Archivos ignorados en Git
+│-- package.json     # Dependencias del proyecto
+│-- README.md        # Documentación del backend
 ```
 
-### **2️⃣ Configurar el backend**
-```bash
-cd backend
-python -m venv env
-source env/bin/activate  # En Windows: env\Scripts\activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-```
+## ⚙️ Instalación
 
-### **3️⃣ Configurar el frontend**
-```bash
-cd frontend
-npm install
-npm run dev
-```
+1. **Clonar el repositorio:**
 
----
+   ```sh
+   git clone <URL_DEL_REPOSITORIO>
+   cd backend
+   ```
 
-## ✅ Estado del Proyecto
-📌 **En desarrollo** - MVP planeado para mayo 2025. 🚀  
+2. **Instalar dependencias:**
 
----
+   ```sh
+   npm install
+   ```
+
+3. **Configurar las variables de entorno:**
+   Crear un archivo `.env` en la raíz del backend y definir las siguientes variables:
+
+   ```env
+   DATABASE_URL=postgresql://usuario:password@localhost:5432/AromaLife
+   FIREBASE_PROJECT_ID=<TU_PROYECTO>
+   FIREBASE_CLIENT_EMAIL=<CLIENT_EMAIL>
+   FIREBASE_PRIVATE_KEY=<PRIVATE_KEY>
+   ```
+
+4. **Configurar la base de datos con Prisma:**
+
+   ```sh
+   npx prisma migrate dev --name init
+   npx prisma generate
+   ```
+
+5. **Iniciar el servidor:**
+
+   ```sh
+   npm start
+   ```
+
+## 🛠 Endpoints principales
+
+| Método | Endpoint           | Descripción                 |
+| ------ | ------------------ | --------------------------- |
+| POST   | /api/auth/login    | Iniciar sesión con Firebase |
+| POST   | /api/auth/register | Registrar usuario           |
+| GET    | /api/products      | Obtener lista de productos  |
+| POST   | /api/orders        | Crear una orden de compra   |
+
+## 📌 Notas
+
+- Se recomienda usar **Postman** o **Insomnia** para probar los endpoints.
+- Puedes conectar este backend con el frontend en **Next.js**.
+- Asegúrate de tener PostgreSQL corriendo en tu máquina o en un servicio en la nube.
+
+**© 2025 AromaVerse - Backend API**
