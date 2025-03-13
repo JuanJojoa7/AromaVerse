@@ -1,53 +1,44 @@
-# AromaVerse Backend
+# AromaVerse - Plataforma de Venta de Velas Aromáticas  
 
-Este es el backend del proyecto **AromaVerse**, una plataforma para la venta de velas aromáticas. Está desarrollado con **Node.js**, **Express**, **PostgreSQL** y **Prisma ORM**, e integra **Firebase Authentication** para la gestión de usuarios.
+AromaVerse es una plataforma e-commerce para la venta de velas aromáticas. El proyecto está desarrollado con **Node.js** en el backend y **Next.js** en el frontend, integrando autenticación con **Firebase**, procesamiento de pagos con **MercadoPago/PayU**, y una base de datos PostgreSQL gestionada con **Prisma ORM**.  
 
-## 🚀 Tecnologías
+## 🚀 Tecnologías  
 
-- **Node.js** con **Express** (Framework backend)
-- **PostgreSQL** con **Prisma ORM** (Base de datos y ORM)
-- **Firebase Authentication** (Autenticación de usuarios)
-- **Firebase Storage** (Almacenamiento de imágenes)
-- **MercadoPago / PayU** (Pasarelas de pago)
-- **Docker** (Opcional para despliegue)
+### 🔹 Backend  
+- **Node.js** con **Express** (Framework backend)  
+- **PostgreSQL** con **Prisma ORM** (Base de datos y ORM)  
+- **Firebase Authentication** (Autenticación de usuarios)  
+- **Firebase Storage** (Almacenamiento de imágenes)  
+- **MercadoPago / PayU** (Pasarelas de pago)  
 
-## 📂 Estructura del Proyecto
+### 🔹 Frontend  
+- **Next.js** con **React** (Framework para el frontend)  
+- **TailwindCSS** (Estilos)  
+- **Redux Toolkit / Zustand** (Gestión de estado)  
+- **Three.js** (Previsualización 3D de productos)  
 
+### 🔹 Infraestructura  
+- **Backend en AWS/GCP**  
+- **Frontend en Vercel**  
+- **Docker** (Opcional para despliegue)  
+
+## ⚙️ Instalación  
+
+### 🖥️ Clonar el repositorio  
+```sh
+git clone <URL_DEL_REPOSITORIO>
+cd AromaVerse
 ```
-backend/
-│-- prisma/          # Esquema de la base de datos y migraciones
-│-- src/
-│   │-- controllers/ # Lógica de negocio
-│   │-- middleware/  # Middlewares para validaciones y seguridad
-│   │-- models/      # Modelos de la base de datos con Prisma
-│   │-- routes/      # Definición de rutas con Express
-│   │-- services/    # Servicios para conectar con Firebase y otros
-│   │-- app.js       # Configuración de Express
-│   └-- server.js    # Punto de entrada del backend
-│-- .env             # Variables de entorno
-│-- .gitignore       # Archivos ignorados en Git
-│-- package.json     # Dependencias del proyecto
-│-- README.md        # Documentación del backend
-```
 
-## ⚙️ Instalación
-
-1. **Clonar el repositorio:**
-
+### 🔹 Configurar el backend  
+1. **Instalar dependencias:**  
    ```sh
-   git clone <URL_DEL_REPOSITORIO>
    cd backend
-   ```
-
-2. **Instalar dependencias:**
-
-   ```sh
    npm install
    ```
 
-3. **Configurar las variables de entorno:**
-   Crear un archivo `.env` en la raíz del backend y definir las siguientes variables:
-
+2. **Configurar las variables de entorno:**  
+   Crear un archivo `.env` en `backend/` con:  
    ```env
    DATABASE_URL=postgresql://usuario:password@localhost:5432/AromaLife
    FIREBASE_PROJECT_ID=<TU_PROYECTO>
@@ -55,32 +46,51 @@ backend/
    FIREBASE_PRIVATE_KEY=<PRIVATE_KEY>
    ```
 
-4. **Configurar la base de datos con Prisma:**
-
+3. **Configurar la base de datos con Prisma:**  
    ```sh
    npx prisma migrate dev --name init
    npx prisma generate
    ```
 
-5. **Iniciar el servidor:**
-
+4. **Iniciar el servidor backend:**  
    ```sh
    npm start
    ```
 
-## 🛠 Endpoints principales
+### 🔹 Configurar el frontend  
+1. **Instalar dependencias:**  
+   ```sh
+   cd ../frontend
+   npm install
+   ```
+
+2. **Configurar las variables de entorno:**  
+   Crear un archivo `.env.local` en `frontend/` con:  
+   ```env
+   NEXT_PUBLIC_API_URL=http://localhost:4000/api
+   NEXT_PUBLIC_FIREBASE_API_KEY=<FIREBASE_API_KEY>
+   ```
+
+3. **Iniciar el frontend:**  
+   ```sh
+   npm run dev
+   ```
+
+## 🛠 Endpoints principales  
 
 | Método | Endpoint           | Descripción                 |
-| ------ | ------------------ | --------------------------- |
+|--------|--------------------|-----------------------------|
 | POST   | /api/auth/login    | Iniciar sesión con Firebase |
 | POST   | /api/auth/register | Registrar usuario           |
 | GET    | /api/products      | Obtener lista de productos  |
 | POST   | /api/orders        | Crear una orden de compra   |
 
-## 📌 Notas
+## 🎨 Características del Frontend  
 
-- Se recomienda usar **Postman** o **Insomnia** para probar los endpoints.
-- Puedes conectar este backend con el frontend en **Next.js**.
-- Asegúrate de tener PostgreSQL corriendo en tu máquina o en un servicio en la nube.
+- **Diseño moderno y responsivo** con **TailwindCSS**  
+- **Carrito de compras** con Redux Toolkit/Zustand  
+- **Autenticación con Firebase**  
+- **Vista 3D de productos con Three.js**  
+- **Checkout integrado con MercadoPago/PayU**   
 
-**© 2025 AromaVerse - Backend API**
+📌 **© 2025 AromaVerse - Todos los derechos reservados.** 
