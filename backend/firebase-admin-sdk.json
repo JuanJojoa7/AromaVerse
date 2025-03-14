@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "aromalife-67921",
+  "private_key_id": "5bff09e767d42c723e0a44b31c82801177a6be17",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCuQUw8WXLai5t6\nJnAQyDY9DMrAxt48NaZ8WiNf6KZVGGA2NZZdNVer5eVq6Wfo9c8mQDV5a0uYs7pt\nsRpRQHMqCAwIzyYb4QMAZTtUD58Gfdpb11+8SpLZAgGSkds1B4DIwy3lr9Bkvr94\nU4BXR0tywuL25V+raP+aqBqCztlYobxdfiJWQxUDqqIsMo78h8TyB1ChJb4fEWAE\nw0b6rZNrZ3K791mhbJN1uCuf+pHZpd8P9DoV2HOniClfPK0uuSKWxN2uVYrk4Ccm\nVoR8cx4nJBKo95/nSwqhkidgNrcquXg/O1f7vV410sfNC28HonyW9CUk/X/yxybp\n6iQzDZyHAgMBAAECggEAGXXJ9UFegicGwvytwA34usfNMgh8fRCbsCydYYyFDQbg\nO9ttilXaZu/SquHKgGO17hFQntp586hC83b+cOO5T+lYFMtrdoRUY3DnD7uukQy/\nZE7eGo1M0m80Gp28CQ39F5hI8vfSu32RTTvqExaEJBLshYVzCoDvY8HvCbC+WfAd\n5Edx4Yi3+QbdtpWrHeEMH13nJl3rbBe+lhRt/sTHiOmNpQhLRy3f2XyfHi6VQXk/\ndtKrWE9jWaH5ZGHMxfXtOCeG9ECCwLrk8a8Xpt6DQwMzxRiGav9aKO5T0M8BPHv3\nwBmZQR2hgJBL2uVGRITl6MrFy0VogDSIL6L9N6ejCQKBgQDdFsXdZUykQHapqrxt\n4pkrhkdSgz8VDZuvwlEU2NhUvMCgM8Cht75nPXlgt/IgdhXePYDuORG9zhHEIJAH\nkCMZJBlL/oRh/grOPH+TdumWQ1IVoVmJnGrgdqJNM6jFf8UmdIlJ+4CZYikGZrKz\nFKk5yHAC98EeE3OhTzQSNxE8zwKBgQDJxVPIK4lBRleMZ4uNS9ChIt616XjWz6/6\nqt9FrvWLvY3S4JnX1cI/95Z0GnnylXMhlXN+C1sElUsOvArljIxM841zBxt++0uG\nNrAnTtAsncaa6wewhob/59iWFwmlKoqMyzv4ddINqSxiZGel27W7A9xbOlEzl1rj\n6DzbrpDCyQKBgCG94gDB/wpqVDHcvtk+ZgYAfk4Xfb8mzoXqcBlwZsO38uYAP/vu\nYP68oROjvy45F2lNlanFx/Fhy9BU7+ZXlyO1IK86btXNwbRsA0RsN4YZTCPE9jdM\nSftr36VMpwtNTrdpvbIu0heWpZA2iDtQgesxrfal/TEr4s/RmK7W/Kh9AoGBAL8Q\n6WGoOHVjkwwWEYRfwtSUHKnOyOtCCLcqj/uAzmzhtyd2ILjOZwAECKkxWUFqXHf0\n+kTlo+8XINh3ISp2iXVlPREsLdF1TfNuXika7O8TCTsyTTnQao5ykhqu/ic1vbXN\nzqBdkef1x131DmF1SQYrhcOt2a8tKJihFuBA0jxhAoGBALcxNs2dBBeTn7i6SXgT\nhmcuGl3Jl+cQ89v/62WKjtKIdw/ApBAR6Et0GgzKo0m/7ZRKkB4zjtyZENJUYdPO\nKB26VmD9GCJGJPVAmsYT9zD2un/08/hbFD19XfvLHcsQuTKjpU4QXsaPaW0vAym4\nzV9umODB9t+0X1J1+hf0EWIW\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@aromalife-67921.iam.gserviceaccount.com",
+  "client_id": "114327725009013195483",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40aromalife-67921.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
