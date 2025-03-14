@@ -1,12 +1,22 @@
 {
   "dependencies": {
+    "@prisma/client": "^6.5.0",
     "bcrypt": "^5.1.1",
     "jsonwebtoken": "^9.0.2",
+    "prisma": "^6.5.0",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.9",
-    "nodemon": "^3.1.9"
+    "@types/node": "^22.13.10",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "dev": "nodemon --exec ts-node index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
   }
 }
