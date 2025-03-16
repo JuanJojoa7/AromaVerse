@@ -13,4 +13,10 @@ userRouter.get('/', (req, res)=> userController.getAllUsers(req, res));
 //Eliminar un usuario por ID
 userRouter.delete('/:id', (req, res)=> userController.deleteUser(req, res));
 
+//Actualizar un usuario por ID
+userRouter.put('/:id', (req, res)=> userController.updateUser(req, res));
+
+//Login
+userRouter.post('/login', (req, res) => userController.login(req, res));
+
 export default userRouter;

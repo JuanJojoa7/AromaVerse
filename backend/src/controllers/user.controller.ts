@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { UserService } from '../services';
+import { AuthError } from '../exceptions';
 
 
 const userService = new UserService();
@@ -44,6 +45,44 @@ export class UserController {
         return;
       }
       res.status(500).json({message: 'Internal server error', error});
+    }
+  }
+
+  public async updateUser(req: Request, res: Response): Promise<void>{
+    try {
+      const userId = parseInt(req.params.id, 10);
+      const userInput = req.body;
+      const updatedUser = await userService.updateUser(userId, userInput);
+
+
+      //Elimino la contraseña del usuario actualizado
+      if(updatedUser.password){
+        delete updatedUser.password;
+      }
+      res.status(200).json(updatedUser);
+
+    } catch (error) {
+      console.error('Error in method updateUser:', error);
+      if(error instanceof Error && error.message === 'User not found'){
+        res.status(404).json({message: 'User not found'});
+        return;
+      }
+      res.status(500).json({message: 'Internal server error', error});
+    }
+  }
+
+  //Metodo Login
+  public async login(req: Request, res: Response): Promise<void>{
+    try {
+      const resObj = await userService.login(req.body);
+      res.status(200).json(resObj);
+    } catch (error) {
+      console.error('Error Login', error);
+      if(error instanceof AuthError){
+        res.status(401).json({ message: error.message})
+        return;
+      }
+      res.status(500).json({ message: 'Internal server Error', error})
     }
   }
 }

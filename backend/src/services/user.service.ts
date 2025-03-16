@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { AuthError } from '../exceptions';
 
 const prisma = new PrismaClient();
 
@@ -14,6 +16,43 @@ export class UserService {
       });
     } catch (error) {
       console.error('Error al buscar el usuario por email:', error);
+      throw error;
+    }
+  }
+
+  private generateToken(id: number, email: string, role: string): string {
+    try {
+      return jwt.sign(
+        { user: { id, email, role } },
+        process.env.JWT_SECRET || 'secret',
+        { expiresIn: '10m'} //Cambiar valor al gusto
+      )
+    } catch (error) {
+      console.error('Error en generateToken', error)
+      throw error;
+    }
+  }
+
+  public async login(userLogin: { email: string, password: string}): Promise<any>{
+    try {
+      const userExists = await this.findByEmail(userLogin.email);
+      if(!userExists){
+        throw new AuthError('User not found');
+      }
+
+      const token = this.generateToken(userExists.id, userExists.email, userExists.role);
+
+      return{
+        user: {
+          id: userExists.id,
+          name: userExists.name,
+          email: userExists.email,
+          role: userExists.role,
+        },
+        token,
+      };
+    } catch (error) {
+      console.error('Error en login', error);
       throw error;
     }
   }
@@ -95,6 +134,32 @@ export class UserService {
       return user; //Aqui devuelve el usaurio eliminado
     } catch (error) {
       console.error('Error al eliminar el usuario:', error);
+      throw error;
+    }
+  }
+
+  //Actualizar un usuario
+  public async updateUser(id: number, userInput: any): Promise<any | null>{
+    try {
+      const userExists = await this.findById(id);
+      if(!userExists){
+        throw new Error('User not found');
+      }
+
+      //Para encriptar la contraseña si se da una nueva
+      if(userInput.password){
+        userInput.password = await bcrypt.hash(userInput.password, 10);
+      }
+
+      const updatedUser = await prisma.userAccount.update({
+        where: {id},
+        data: userInput,
+      });
+
+      return updatedUser;
+
+    } catch (error) {
+      console.error('Error al actualizar el usuario:', error);
       throw error;
     }
   }
