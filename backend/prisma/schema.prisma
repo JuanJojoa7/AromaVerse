@@ -15,9 +15,9 @@ datasource db {
 
 model UserAccount {
   id               Int        @id @default(autoincrement())
+  firebaseUid      String     @unique // Nuevo campo para almacenar el UID de Firebase
   name             String
   email            String     @unique
-  password         String
   phone            String?
   address          String?
   registrationDate DateTime   @default(now())
