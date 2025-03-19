@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import express, { Express ,Request, Response } from 'express';
 import { connectToDatabase } from './src/lib/DB';
 import userRoutes from './src/routes/user.routes';
+import productRoutes from './src/routes/product.routes';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.use('/users', userRoutes);
+app.use('/products', productRoutes);
 
 // Conecta a la base de datos
 connectToDatabase()
