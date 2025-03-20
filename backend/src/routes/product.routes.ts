@@ -20,7 +20,7 @@ const mood_Fragrance_Controller = new Mood_Fragrance_Controller();
 //Crear Contenedor
 //productRouter.post('/container', (req, res)=> containerController.create(req, res));
 
-productRouter.post('/container', auth, authorizeRole('admin'), validateSchema(containerSchema), (req, res) => containerController.create(req, res));
+productRouter.post('/container', auth, authorizeRole(['admin', 'customer']), validateSchema(containerSchema), (req, res) => containerController.create(req, res));
 
 
 //Traer todos los contenedores
