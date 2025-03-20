@@ -1,8 +1,14 @@
 import express from 'express';
 import { ContainerController, FragranceController, MoodController, Mood_Fragrance_Controller } from '../controllers';
+import { authorizeRole } from '../middlewares';
+import { auth } from '../middlewares';
+import { validateSchema } from '../middlewares';
+import { containerSchema } from '../schemas';
+
 
 const productRouter = express.Router();
 const containerController = new ContainerController();
+
 const fragranceController = new FragranceController();
 const moodController = new MoodController();
 const mood_Fragrance_Controller = new Mood_Fragrance_Controller();
@@ -12,7 +18,10 @@ const mood_Fragrance_Controller = new Mood_Fragrance_Controller();
 //CONTAINER ROUTES
 
 //Crear Contenedor
-productRouter.post('/container', (req, res)=> containerController.create(req, res));
+//productRouter.post('/container', (req, res)=> containerController.create(req, res));
+
+productRouter.post('/container', auth, authorizeRole('admin'), validateSchema(containerSchema), (req, res) => containerController.create(req, res));
+
 
 //Traer todos los contenedores
 productRouter.get('/container', (req, res)=> containerController.getAllContainers(req, res));

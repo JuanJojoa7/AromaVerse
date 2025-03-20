@@ -1,14 +1,22 @@
 import { Request, Response } from 'express';
 import { ContainerService } from '../../services';
+import { validateSchema } from '../../middlewares';
+import { containerSchema } from '../../schemas/container.schema'; //No se porque me toco importarlo asi, despues lo pregunto con el profe
 
 
 const containerService = new ContainerService();
 
 export class ContainerController {
 
+
   public async create(req: Request, res: Response): Promise<void>{
     console.log("container controller")
     try {
+      //Añadi esto como la validacion de la estructura de un contenedor
+      const containerData = req.body;
+      await validateSchema(containerSchema)(req, res, ()  => {});
+      //Estas dos lineas de arriba son para validar la estructura de un contenedor
+
       const newContainer = await containerService.createContainer(req.body);
       res.status(201).json(newContainer);
 

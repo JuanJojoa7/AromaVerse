@@ -16,10 +16,11 @@ export class ContainerService {
                 name: UserInput.name,
                 material: UserInput.material,
                 description: UserInput.description,
-                }
+                },
             });
             return newContainer;
         }catch (error) {
+            console.error('Error al crear el contenedor:', error);
             throw error;
         }
     }

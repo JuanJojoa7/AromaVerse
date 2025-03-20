@@ -3,25 +3,27 @@ import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { AuthError } from '../exceptions';
 
-export const auth = (req: Request, res: Response, next: NextFunction) => {
+export const auth = (req: Request, res: Response, next: NextFunction): void => {
   let token: string | undefined = req.header('Authorization');
 
-  // Verificar si el token existe
   if (!token) {
-    return res.status(401).json({ message: 'User not authorized' });
+    // Enviamos una respuesta sin retornar explícitamente
+    res.status(401).json({ message: 'User not authorized' });
+    return; // Salimos del middleware
   }
 
-  // Eliminar "Bearer " del token
   token = token.replace('Bearer ', '');
 
   try {
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET || 'secret');
-    req.body.loggedUser = decoded.user;
+    req.body.loggedUser = decoded.user; // Adjuntar el usuario decodificado al cuerpo de la solicitud
     next();
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({ message: 'Token expired' });
+      res.status(401).json({ message: 'Token expired' });
+      return;
     }
-    return res.status(401).json({ message: 'Invalid token' });
+    res.status(401).json({ message: 'Invalid token' });
+    return;
   }
 };
