@@ -63,13 +63,13 @@ productRouter.delete('/mood/:id', (req, res)=> moodController.deleteMood(req, re
 productRouter.post('/mood_fragrance', (req, res)=> mood_Fragrance_Controller.linkMoodToFragrance(req, res));
 
 //Traer todos los Mood basados en Fragrance
-productRouter.get('/mood_fragrance', (req, res)=> mood_Fragrance_Controller.getFragranceWithMoods(req, res));
+productRouter.get('/mood_fragrance/f/:id', (req, res)=> mood_Fragrance_Controller.getFragranceWithMoods(req, res));
 
 //Traer todos los Fragrance basados en Mood
-productRouter.get('/mood_fragrance/:id', (req, res)=> mood_Fragrance_Controller.getMoodWithFragrances(req, res));
+productRouter.get('/mood_fragrance/m/:id', (req, res)=> mood_Fragrance_Controller.getMoodWithFragrances(req, res));
 
 //Unlink Mood_Fragrance
-productRouter.delete('/mood_fragrance/:id', (req, res)=> mood_Fragrance_Controller.unlinkMoodFromFragrance(req, res));
+productRouter.delete('/mood_fragrance/:id/:id', (req, res)=> mood_Fragrance_Controller.unlinkMoodFromFragrance(req, res));
 
 //----------------------------------------------
 
