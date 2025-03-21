@@ -18,32 +18,29 @@ const mood_Fragrance_Controller = new Mood_Fragrance_Controller();
 //CONTAINER ROUTES
 
 //Crear Contenedor
-//productRouter.post('/container', (req, res)=> containerController.create(req, res));
-
 productRouter.post('/container', auth, authorizeRole(['admin', 'customer']), validateSchema(containerSchema), (req, res) => containerController.create(req, res));
 
-
 //Traer todos los contenedores
-productRouter.get('/container', (req, res)=> containerController.getAllContainers(req, res));
+productRouter.get('/container', auth, authorizeRole(['admin, customer']),  (req, res)=> containerController.getAllContainers(req, res));
 
 //Eliminar un contenedor por ID
-productRouter.delete('/container/:id', (req, res)=> containerController.deleteContainer(req, res));
+productRouter.delete('/container/:id', auth, authorizeRole(['admin', 'customer']), (req, res)=> containerController.deleteContainer(req, res));
 
 //Actualizar un contenedor por ID
-productRouter.put('/container/:id', (req, res)=> containerController.updateContainer(req, res));
+productRouter.put('/container/:id', auth, authorizeRole(['admin', 'customer']), validateSchema(containerSchema), (req, res)=> containerController.updateContainer(req, res));
 
 //----------------------------------------------
 
 //FRAGRANCE ROUTES
 
 //Crear Fragancia
-productRouter.post('/fragrance', (req, res)=> fragranceController.create(req, res));
+productRouter.post('/fragrance', auth, authorizeRole(['admin', 'customer']), validateSchema(containerSchema), (req, res)=> fragranceController.create(req, res));
 
 //Traer todas las fragancias
-productRouter.get('/fragrance', (req, res)=> fragranceController.getAllFragrances(req, res));
+productRouter.get('/fragrance',auth, authorizeRole(['admin', 'customer']), (req, res)=> fragranceController.getAllFragrances(req, res));
 
 //Eliminar una fragancia por ID
-productRouter.delete('/fragrance/:id', (req, res)=> fragranceController.deleteFragrance(req, res));
+productRouter.delete('/fragrance/:id',auth, authorizeRole(['admin', 'customer']), (req, res)=> fragranceController.deleteFragrance(req, res));
 
 //----------------------------------------------
 
