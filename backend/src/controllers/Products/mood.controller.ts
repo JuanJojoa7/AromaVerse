@@ -43,4 +43,22 @@ export class MoodController {
         }
     }
 
+    public async updateMood(req: Request, res: Response): Promise<void>{
+        try {
+            const moodId = parseInt(req.params.id, 10);
+            const moodInput = req.body;
+            const updatedMood = await moodService.updateMood(moodId, moodInput);
+            res.status(200).json(updatedMood);
+        } catch (error) {
+            console.error('Error in method updateMood:', error);
+            if(error instanceof Error && error.message === 'Mood not found'){
+                res.status(404).json({message: 'Mood not found'});
+                return;
+            }
+            res.status(500).json({message: 'Internal server error', error});
+        }
+    }
+
+
+
 }

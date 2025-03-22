@@ -1,2 +1,5 @@
 export * from './user.schemas'
-export * from './container.schema'
+export * from './products/container.schema'
+export * from './products/fragrance.schema'
+export * from './products/mood.schema'
+export * from './products/moodFragrance.schema'

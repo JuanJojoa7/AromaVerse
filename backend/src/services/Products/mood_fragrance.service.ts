@@ -48,20 +48,24 @@ export class Mood_Fragrance_Service {
             const mood = await prisma.mood.findUnique({
                 where: { id: moodId },
             });
+            if(!mood){
+                throw new Error('Mood not found')
+            }
             const fragrance = await prisma.fragrance.findUnique({
                 where: { id: fragranceId },
             });
-            if (!mood || !fragrance) {
-                throw new Error('Mood or Fragrance not found');
+            if (!fragrance) {
+                throw new Error('Fragrance not found');
             }
-            await prisma.mood_Fragrance.create({
+            const relation = await prisma.mood_Fragrance.create({
                 data: {
                     moodId,
                     fragranceId,
                 },
             });
-            return mood;
+            return relation
         } catch (error) {
+            console.error('Error en linkMoodToFragrance:', error);
             throw error;
         }
     }
@@ -71,13 +75,20 @@ export class Mood_Fragrance_Service {
             const mood = await prisma.mood.findUnique({
                 where: { id: moodId },
             });
+            if (!mood) {
+                throw new Error('Mood not found');
+            }
+            
             const fragrance = await prisma.fragrance.findUnique({
                 where: { id: fragranceId },
             });
-            if (!mood || !fragrance) {
-                throw new Error('Mood or Fragrance not found');
+
+            if(!fragrance){
+                throw new Error('Fragrance not found')
             }
-            await prisma.mood_Fragrance.delete({
+
+            //Prisma lo recibe asi: {campo1}_{campo2}
+            const relation = await prisma.mood_Fragrance.delete({
                 where: {
                     moodId_fragranceId: {
                         moodId,
@@ -85,8 +96,9 @@ export class Mood_Fragrance_Service {
                     },
                 },
             });
-            return mood;
+            return relation;
         } catch (error) {
+            console.error('Error en unlinkMoodFromFragrance:', error);
             throw error;
         }
     }

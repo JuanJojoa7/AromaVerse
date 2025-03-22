@@ -43,5 +43,23 @@ export class FragranceController {
         }
     }
 
+    public async updateFragrance(req: Request, res: Response): Promise<void>{
+        try {
+          const fragranceId = parseInt(req.params.id, 10);
+          const fragranceInput = req.body;
+          const updatedFragrance = await fragranceService.updateFragrance(fragranceId, fragranceInput);
+          res.status(200).json(updatedFragrance);
+        } catch (error) {
+          console.error('Error in method updateFragrance:', error);
+          if(error instanceof Error && error.message === 'Fragrance not found'){
+            res.status(404).json({message: 'Fragrance not found'});
+            return;
+        }
+          res.status(500).json({message: 'Internal server error', error});
+        }
+      }
+
+
+
 
 }

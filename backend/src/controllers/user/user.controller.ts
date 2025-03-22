@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { UserService } from '../services';
-import { AuthError } from '../exceptions';
+import { UserService } from '../../services';
+import { AuthError } from '../../exceptions';
 
 
 const userService = new UserService();

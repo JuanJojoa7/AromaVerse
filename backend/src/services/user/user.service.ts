@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { AuthError } from '../exceptions';
+import { AuthError } from '../../exceptions';
 
 const prisma = new PrismaClient();
 
@@ -25,7 +25,7 @@ export class UserService {
       return jwt.sign(
         { user: { id, email, role } },
         process.env.JWT_SECRET || 'secret',
-        { expiresIn: '10m'} //Cambiar valor al gusto
+        { expiresIn: '50m'} //Cambiar valor al gusto
       )
     } catch (error) {
       console.error('Error en generateToken', error)

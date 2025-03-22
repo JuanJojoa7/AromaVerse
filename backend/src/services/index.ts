@@ -1,4 +1,4 @@
-export * from './user.service'
+export * from './user/user.service'
 export * from './products/container.service'
 export * from './products/fragance.service'
 export * from './products/mood.service'

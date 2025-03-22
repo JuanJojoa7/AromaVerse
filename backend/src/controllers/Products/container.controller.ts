@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { ContainerService } from '../../services';
 import { validateSchema } from '../../middlewares';
-import { containerSchema } from '../../schemas/container.schema'; //No se porque me toco importarlo asi, despues lo pregunto con el profe
+import { containerSchema } from '../../schemas/products/container.schema'; //No se porque me toco importarlo asi, despues lo pregunto con el profe
 
 
 const containerService = new ContainerService();
