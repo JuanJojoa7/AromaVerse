@@ -34,6 +34,5 @@ connectToDatabase()
     process.exit(1); // Salir del proceso si falla la conexión
   });
 
-
-
+export default app;
 
