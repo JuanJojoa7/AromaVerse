@@ -51,6 +51,11 @@ export class ContainerService {
             const container = await prisma.container.findUnique({
                 where: {id},
             });
+
+            if(!container){
+                throw new Error('Container not found');
+            }
+            
             return container;
         } catch (error) {
             console.error('Error al buscar el contenedor:', error);
