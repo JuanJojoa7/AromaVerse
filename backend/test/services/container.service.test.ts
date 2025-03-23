@@ -1,8 +1,8 @@
 import {describe, expect, test} from '@jest/globals';
-import { ContainerService } from '../src/services';
+import { ContainerService } from '../../src/services';
 import { jest } from '@jest/globals';
 //import { containerSchema } from '../src/schemas/products/container.schema'
-import { containerSchema } from '../src/schemas/'
+import { containerSchema } from '../../src/schemas'
 
 // Mock the Prisma client
 jest.mock('@prisma/client', () => {
