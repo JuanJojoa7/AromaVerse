@@ -42,6 +42,13 @@ export class ContainerController {
 
   public async deleteContainer(req: Request, res: Response): Promise<void>{
     try {
+
+
+      const { id } = req.params;
+      if(!Number.isInteger(Number(id))){
+        res.status(400).json({ message: 'Invalid ID'})
+        return;
+      }
       const container = await containerService.deleteContainer(Number(req.params.id));
       res.status(200).json(container);
     } catch (error) {

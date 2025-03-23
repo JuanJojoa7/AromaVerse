@@ -1,6 +1,8 @@
 import {describe, expect, test} from '@jest/globals';
 import { ContainerService } from '../src/services';
 import { jest } from '@jest/globals';
+//import { containerSchema } from '../src/schemas/products/container.schema'
+import { containerSchema } from '../src/schemas/'
 
 // Mock the Prisma client
 jest.mock('@prisma/client', () => {
@@ -89,7 +91,7 @@ describe('container create', () => {
                 material: 'material1',
                 description: 'description1'
             },
-            expected: 'Name is required'
+            expected: 'Name cannot be empty'
         },
         {
             input: {
@@ -97,7 +99,7 @@ describe('container create', () => {
                 material: '',
                 description: 'description2'
             },
-            expected: 'Material is required'
+            expected: 'Material cannot be empty'
         },
         {
             input: {
@@ -105,13 +107,20 @@ describe('container create', () => {
                 material: 'material3',
                 description: ''
             },
-            expected: 'Description is required'
+            expected: 'Description cannot be empty'
         }
     ];
 
     for (const testcase of testcase_CreateContainer) {
         test('creates container', async () => {
+
+            try {
+               await containerSchema.parseAsync(testcase.input); 
+            } catch (error) {
+                throw new Error('Invalid test data');
+            }
             const container = await containerService.createContainer(testcase.input);
+
             expect(container).toHaveProperty('id');
             expect(container.name).toBe(testcase.expected.name);
             expect(container.material).toBe(testcase.expected.material);
@@ -119,11 +128,11 @@ describe('container create', () => {
         });
     }
 
+    
+
     for (const testcase of testcase_FailedCreateContainer) {
-        test('fails to create container with missing name', async () => {
-            await expect(containerService.createContainer(testcase.input))
-            .rejects
-            .toThrow(testcase.expected);
+        test(`fails to create container with missing ${Object.keys(testcase.input).find(key => !testcase.input[key])}`, async () => {
+            await expect(containerSchema.parseAsync(testcase.input)).rejects.toThrow(testcase.expected);
         });
     }
 
@@ -181,17 +190,6 @@ describe('container find', () => {
         }
     ];
 
-    const testcase_FindContainerFailed = [
-        {
-            input: {
-                name: 'container1',
-                material: 'material1',
-                description: 'description1'
-            },
-            expected: 'ID is required'
-        }
-    ];
-
     for (const testcase of testcase_FindContainer) {
         test('finds container by id', async () => {
             const container = await containerService.createContainer(testcase.input);
@@ -207,14 +205,7 @@ describe('container find', () => {
             expect(containers).toContain(container);
         });
     }
-
-    for (const testcase of testcase_FindContainerFailed) {
-        test('fails to find container with missing id', async () => {
-            await expect(containerService.findByID(0))
-            .rejects
-            .toThrow(testcase.expected);
-        });
-    }
+    
 });
 
 // Delete container

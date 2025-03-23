@@ -10,15 +10,6 @@ export class ContainerService {
         description: string;
     
       }): Promise<any> {
-        if (UserInput.name === '') {
-            throw new Error('Name is required');
-        }
-        if (UserInput.material === '') {
-            throw new Error('Material is required');
-        }
-        if (UserInput.description === '') {
-            throw new Error('Description is required');
-        }
         try {
           const newContainer = await prisma.container.create({
             data: {
@@ -45,9 +36,6 @@ export class ContainerService {
 
     public async findByID(id: number): Promise<any | null> {
         try {
-            if (!id) {
-                throw new Error('ID is required');
-            }
             const container = await prisma.container.findUnique({
                 where: {id},
             });
