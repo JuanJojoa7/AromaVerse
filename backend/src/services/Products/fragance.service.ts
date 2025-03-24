@@ -21,7 +21,7 @@ export class FragranceService {
 
             return newFragrance;
         } catch (error) {
-         
+            console.error('Error al crear la fragrance:', error);
             throw error;
         }
     }
@@ -40,6 +40,11 @@ export class FragranceService {
             const fragrance = await prisma.fragrance.findUnique({
                 where: {id},
             });
+
+            if(!fragrance){
+                throw new Error('Fragrance not found');
+            }
+
             return fragrance;
         } catch (error) {
             console.error('Error al buscar la fragancia:', error);
@@ -49,6 +54,9 @@ export class FragranceService {
 
     public async deleteFragrance(id: number): Promise<any | null>{
         try {
+            if(await this.findByID(id) === null){
+                throw new Error('Fragrance not found');
+            }
             const fragrance = await prisma.fragrance.delete({
                 where: {
                     id: id

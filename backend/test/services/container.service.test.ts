@@ -190,6 +190,27 @@ describe('container find', () => {
         }
     ];
 
+    const testcase_FindContainerFail = [
+        {
+            input: {
+                id: 999
+            },
+            expected: 'Container not found'
+        },
+        {
+            input: {
+                id: 9999
+            },
+            expected: 'Container not found'
+        },
+        {
+            input: {
+                id: 99999
+            },
+            expected: 'Container not found'
+        }
+    ];
+
     for (const testcase of testcase_FindContainer) {
         test('finds container by id', async () => {
             const container = await containerService.createContainer(testcase.input);
@@ -204,6 +225,12 @@ describe('container find', () => {
             const containers = await containerService.findAll();
             expect(containers).toContain(container);
         });
+    }
+
+    for(const testcase of testcase_FindContainerFail) {
+        test('fails to find container', async () => {
+                    await expect(containerService.findByID(testcase.input.id)).rejects.toThrow(testcase.expected);
+                });
     }
     
 });
@@ -236,12 +263,39 @@ describe('container delete', () => {
         }
     ];
 
+    const testcase_DeleteContainerFail = [
+        {
+            input: {
+                id: 999
+            },
+            expected: 'Container not found'
+        },
+        {
+            input: {
+                id: 9999
+            },
+            expected: 'Container not found'
+        },
+        {
+            input: {
+                id: 99999
+            },
+            expected: 'Container not found'
+        }
+    ];
+
     for (const testcase of testcase_DeleteContainer) {
         test('deletes container', async () => {
             const container = await containerService.createContainer(testcase.input);
             await containerService.deleteContainer(container.id);
             const containers = await containerService.findAll();
             expect(containers).not.toContain(container);
+        });
+    }
+
+    for(const testcase of testcase_DeleteContainerFail) {
+        test('fails to delete container', async () => {
+            await expect(containerService.deleteContainer(testcase.input.id)).rejects.toThrow(testcase.expected);
         });
     }
 });

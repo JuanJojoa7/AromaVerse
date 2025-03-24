@@ -38,6 +38,9 @@ export class MoodService {
             const mood = await prisma.mood.findUnique({
                 where: {id},
             });
+            if(!mood){
+                throw new Error('Mood not found');
+            }
             return mood;
         } catch (error) {
             console.error('Error al buscar el mood:', error);
@@ -47,6 +50,9 @@ export class MoodService {
 
     public async deleteMood(id: number): Promise<any | null>{
         try {
+            if(await this.findByID(id) === null){
+                throw new Error('Mood not found');
+            }
             const mood = await prisma.mood.delete({
                 where: {
                     id: id

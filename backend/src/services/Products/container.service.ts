@@ -73,19 +73,6 @@ export class ContainerService {
         description: string;
     }): Promise<any | null> {
         try {
-            const containerExists = await this.findByID(id);
-            if(containerExists === null){
-                throw new Error('Container not found');
-            }
-            if(UserInput.name === ''){
-                throw new Error('Name is required');
-            }
-            if(UserInput.material === ''){
-                throw new Error('Material is required');
-            }
-            if(UserInput.description === ''){
-                throw new Error('Description is required');
-            }
             const container = await prisma.container.update({
                 where: {id},
                 data: {
