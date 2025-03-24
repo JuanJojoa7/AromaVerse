@@ -1,6 +1,7 @@
 import app from '../../index.ts'; // Import the app instance from index.js
 import {describe, expect, test, afterAll, beforeAll} from '@jest/globals';
 import jwt from 'jsonwebtoken';
+import prisma from '../../src/lib/DB.ts'
 import { disconnect } from '../../src/lib/DB.ts';
 import testServer from '../../src/utils/testServer.ts';
 
@@ -134,6 +135,7 @@ describe('GET /products/container', () => {
   
     beforeAll(async () => {
       // Crear contenedores antes de ejecutar las pruebas
+      await prisma.container.deleteMany()
       const token = generateTestToken(1, 'admin');
       for (const testcase of testcase_GetContainers) {
         await request
@@ -144,11 +146,20 @@ describe('GET /products/container', () => {
     });
   
     test('should respond with a 200 status code', async () => {
-      const token = generateTestToken(2, 'admin');
+        const token = generateTestToken(2, 'admin');
 
-      const response = await request.get('/products/container').set('Authorization', `Bearer ${token}`);
-      expect(response.status).toBe(200);
+        const response = await request.get('/products/container').set('Authorization', `Bearer ${token}`);
+        expect(response.status).toBe(200);
+
+        response.body.forEach((container: any, index: number) => {
+            expect(container.name).toBe(testcase_GetContainers[index].expected.name);
+            expect(container.material).toBe(testcase_GetContainers[index].expected.material);
+            expect(container.description).toBe(testcase_GetContainers[index].expected.description);
+
+        });
     });
+
+    
 
     afterAll(async () => {
       await disconnect();
