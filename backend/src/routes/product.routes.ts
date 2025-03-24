@@ -20,7 +20,7 @@ const mood_Fragrance_Controller = new Mood_Fragrance_Controller();
 productRouter.post('/container', auth, authorizeRole(['admin', 'customer']), validateSchema(containerSchema), (req, res) => containerController.create(req, res));
 
 //Traer todos los contenedores
-productRouter.get('/container', auth, authorizeRole(['admin, customer']),  (req, res)=> containerController.getAllContainers(req, res));
+productRouter.get('/container', auth, authorizeRole(['admin', 'customer']),  (req, res)=> containerController.getAllContainers(req, res));
 
 //Eliminar un contenedor por ID
 productRouter.delete('/container/:id', auth, authorizeRole(['admin', 'customer']), (req, res)=> containerController.deleteContainer(req, res));

@@ -1,7 +1,6 @@
 // src/middlewares/auth.middleware.ts
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { AuthError } from '../exceptions';
 
 export const auth = (req: Request, res: Response, next: NextFunction): void => {
   let token: string | undefined = req.header('Authorization');
