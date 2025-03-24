@@ -34,28 +34,42 @@ cd AromaVerse
 1. **Instalar dependencias:**  
    ```sh
    cd backend
-   npm install
+   Abrir git bash
+   Ejecutar comando: chmod +x setup.sh
+   ./setup.sh
    ```
+
+1.1. **Ajustes adicionales:**
+
+```sh
+Cuando esten ejecutando el ./setup.sh llegaran a una parte de jest, este es para el funcionamiento de las pruebas de unidad. Solamente denle a que no quieren hacer overwrite jest.config.ts ya que este estara en el repositorio con el que podran ver las pruebas de covertura del proyecto. 
+```
 
 2. **Configurar las variables de entorno:**  
    Crear un archivo `.env` en `backend/` con:  
    ```env
    DATABASE_URL=postgresql://usuario:password@localhost:5432/AromaLife
-   FIREBASE_PROJECT_ID=<TU_PROYECTO>
-   FIREBASE_CLIENT_EMAIL=<CLIENT_EMAIL>
-   FIREBASE_PRIVATE_KEY=<PRIVATE_KEY>
+   PORT = 3000
+   JWT_SECRET = "UnaClaveSecreta"
    ```
 
 3. **Configurar la base de datos con Prisma:**  
    ```sh
-   npx prisma migrate dev --name init
-   npx prisma generate
+   1. Primero en pgAdmin crear una base de datos con el nombre AromaLife
+   2. Ejecutar: prisma migrate dev
+   3. Ejecutar: yarn prisma migrate staus
+   Este debera devolverte un "Ok" 
    ```
 
 4. **Iniciar el servidor backend:**  
    ```sh
-   npm start
+   yarn run dev
    ```
+
+5. **Correr pruebas de unidad:**
+```sh
+yarn test
+```
 
 ### 🔹 Configurar el frontend  
 1. **Instalar dependencias:**  
