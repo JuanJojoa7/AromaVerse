@@ -5,41 +5,48 @@ const prisma = new PrismaClient();
 
 export class Mood_Fragrance_Service {
 
-    // Get Fragrance with its associated Moods
-  public async getFragranceWithMoods(fragranceId: number): Promise<any> {
-    try {
-      const fragrance = await prisma.fragrance.findUnique({
-        where: { id: fragranceId },
-        include: {
-            moodFragrances: {
+    // Get list of Moods associated with a Fragrance
+    public async getFragranceWithMoods(fragranceId: number): Promise<any> {
+        try {
+            const fragrance = await prisma.fragrance.findUnique({
+                where: { id: fragranceId },
                 include: {
-                    mood: true,
+                    moodFragrances: {
+                        include: {
+                            mood: true,
+                        },
+                    },
                 },
-            }
-        },
-      });
-      return fragrance;
-    } catch (error) {
-      throw error;
-    }
-  }
+            });
 
-    // Get Mood with its associated Fragrances
+            if (!fragrance || !fragrance.moodFragrances || fragrance.moodFragrances.length === 0) return null;
+
+            return fragrance.moodFragrances.map(mf => mf.mood);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+
+    // Get list of Fragrances associated with a Mood
     public async getMoodWithFragrances(moodId: number): Promise<any> {
         try {
-          const mood = await prisma.mood.findUnique({
-            where: { id: moodId },
-            include: {
-                moodFragrances: {
-                    include: {
-                        fragrance: true,
+            const mood = await prisma.mood.findUnique({
+                where: { id: moodId },
+                include: {
+                    moodFragrances: {
+                        include: {
+                            fragrance: true,
+                        },
                     },
-                }
-            },
-          });
-          return mood;
+                },
+            });
+            
+            if (!mood || !mood.moodFragrances) return null;
+            
+            return mood.moodFragrances.map(mf => mf.fragrance);
         } catch (error) {
-          throw error;
+            throw error;
         }
     }
 
@@ -87,7 +94,6 @@ export class Mood_Fragrance_Service {
                 throw new Error('Fragrance not found')
             }
 
-            //Prisma lo recibe asi: {campo1}_{campo2}
             const relation = await prisma.mood_Fragrance.delete({
                 where: {
                     moodId_fragranceId: {
@@ -102,5 +108,5 @@ export class Mood_Fragrance_Service {
             throw error;
         }
     }
-
+  
 }
