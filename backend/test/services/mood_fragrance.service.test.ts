@@ -177,7 +177,7 @@ describe ('unlinkMoodFromFragrance', () => {
     };
 
     for (const mood of testcase_Moods) {
-        test('should unlink a mood from a fragrance', async () => {
+        test('should unlink moods from a fragrance', async () => {
             const mood1 = await moodService.createMood(mood.input);
             const fragrance = await fragranceService.createFragrance(testcase_Fragrances.input);
     
@@ -190,6 +190,19 @@ describe ('unlinkMoodFromFragrance', () => {
             expect(mood1).not.toContainEqual(updatedMoods);
         });
     }
+
+    // test('should unlink a mood from a fragrance', async () => {
+    //     const fragrance = await fragranceService.createFragrance(testcase_Fragrances.input);
+    //     for(const mood of testcase_Moods){
+    //         const mood1 = await moodService.createMood(mood.input);
+    //         await moodFragranceService.linkMoodToFragrance(mood1.id, fragrance.id);
+    //     }
+    //     const moods = await moodFragranceService.getFragranceWithMoods(fragrance.id);
+    //     expect(moods).toHaveLength(3);
+    //     await moodFragranceService.unlinkMoodFromFragrance(testcase_Moods[0].input.id, fragrance.id);
+    //     const updatedMoods = await moodFragranceService.getFragranceWithMoods(fragrance.id);
+    //     expect(updatedMoods).toHaveLength(2);
+    // });
 });
 
 // Gets a list of Fragrances / Moods associated with a Mood / Fragrance

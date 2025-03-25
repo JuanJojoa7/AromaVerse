@@ -39,6 +39,9 @@ export class UserService {
       if(!userExists){
         throw new AuthError('User not found');
       }
+      if(!await bcrypt.compare(userLogin.password, userExists.password)){
+        throw new AuthError('Invalid password');
+      }
 
       const token = this.generateToken(userExists.id, userExists.email, userExists.role);
 
@@ -72,7 +75,7 @@ export class UserService {
 
       if(userExists !== null){
         //console.error('User already existss');
-        throw new Error('User already exists');
+        throw new Error('User already exists:');
       }
 
       if(UserInput.password){
