@@ -1,6 +1,10 @@
 # AromaVerse - Plataforma de Venta de Velas Aromáticas  
 
-AromaVerse es una plataforma e-commerce para la venta de velas aromáticas. El proyecto está desarrollado con **Node.js** en el backend y **Next.js** en el frontend, integrando autenticación con **Firebase**, procesamiento de pagos con **MercadoPago/PayU**, y una base de datos PostgreSQL gestionada con **Prisma ORM**.  
+AromaVerse es una plataforma e-commerce para la venta de velas aromáticas. El proyecto está desarrollado con **Node.js** en el backend y **Next.js** en el frontend, integrando autenticación con **Firebase**, procesamiento de pagos con **MercadoPago/PayU**, y una base de datos PostgreSQL gestionada con **Prisma ORM**.
+
+## Url del despliegue de proyecto
+
+`https://aromaverse-yf4d.onrender.com`
 
 ## 🚀 Tecnologías  
 

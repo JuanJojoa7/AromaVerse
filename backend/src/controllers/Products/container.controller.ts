@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ContainerService } from '../../services';
+import { ContainerService } from './../../services/index';
 import { validateSchema } from '../../middlewares';
 import { containerSchema } from '../../schemas/products/container.schema'; //No se porque me toco importarlo asi, despues lo pregunto con el profe
 

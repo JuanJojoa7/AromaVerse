@@ -1,5 +1,3 @@
-import e from 'express';
-
 export * from './user/user.controller';
 export * from './Products/container.controller';
 export * from './Products/fragrance.controller';
