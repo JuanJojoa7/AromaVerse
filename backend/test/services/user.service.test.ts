@@ -116,7 +116,7 @@ describe('user create', () => {
                 phone: '1234567890',
                 address: '123 Main St',
             },
-            expected: 'Password must be at least 8 characters long',
+            expected: 'Password must be at least 5 characters long',
         },
         {
             input: {

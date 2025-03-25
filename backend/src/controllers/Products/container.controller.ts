@@ -12,22 +12,19 @@ export class ContainerController {
   public async create(req: Request, res: Response): Promise<void>{
     console.log("container controller")
     try {
-      //Añadi esto como la validacion de la estructura de un contenedor
       const containerData = req.body;
       await validateSchema(containerSchema)(req, res, ()  => {});
-      //Estas dos lineas de arriba son para validar la estructura de un contenedor
 
       const newContainer = await containerService.createContainer(req.body);
       res.status(201).json(newContainer);
 
     } catch (error) {
-      //console.error('Error capturado en elm controlador:', error); // Log de depuración
-      if(error instanceof Error && error.message === 'container already exists'){
-        res.status(400).json({message: 'User already exists'});
-        return;
+      if (error instanceof Error) {
+        if (error.message === 'Name is required' || error.message === 'Material is required' || error.message === 'Description is required') {
+          res.status(400).json({ message: error.message });
+          return;
+        }
       }
-      //console.error('Error in method create:', error);
-      res.status(500).json({message: 'Internal server errorrrrr', error});
     }
   }
 
@@ -42,8 +39,6 @@ export class ContainerController {
 
   public async deleteContainer(req: Request, res: Response): Promise<void>{
     try {
-
-
       const { id } = req.params;
       if(!Number.isInteger(Number(id))){
         res.status(400).json({ message: 'Invalid ID'})
@@ -57,7 +52,6 @@ export class ContainerController {
           res.status(404).json({message: 'Container not found'});
           return;
         }
-        res.status(500).json({message: 'Internal server error', error});
     }
   }
 
