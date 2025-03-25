@@ -23,7 +23,6 @@ logs/
 serviceAccountKey.json
 
 # Build files
-dist/
 coverage/
 
 # IDE and OS files
