@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { MoodService } from '../../services';
+import { MoodService } from '../../services/index';
 
 
 const moodService = new MoodService();

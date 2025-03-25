@@ -1,5 +1,5 @@
-export * from './user/user.service'
-export * from './products/container.service'
+export {UserService} from './user/user.service'
+export {ContainerService} from './products/container.service'
 export * from './products/fragrance.service'
 export * from './products/mood.service'
 export * from './products/mood_fragrance.service'
