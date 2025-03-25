@@ -4,7 +4,7 @@ export const userSchema = object({
     name: string({required_error: 'Name is required'}),
     email: string({required_error: 'Email is required'}),
     password: string({required_error: 'Password is required'})
-        .min(8, {message: 'Password must be at least 8 characters long'}),
+        .min(5, {message: 'Password must be at least 5 characters long'}),
     phone: string({required_error: 'Number is required'}),
     address: string({required_error: 'Address is required'}),
 
