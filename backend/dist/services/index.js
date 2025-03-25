@@ -14,11 +14,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ContainerService = exports.UserService = void 0;
-var user_service_1 = require("./user/user.service");
-Object.defineProperty(exports, "UserService", { enumerable: true, get: function () { return user_service_1.UserService; } });
-var container_service_1 = require("./products/container.service");
-Object.defineProperty(exports, "ContainerService", { enumerable: true, get: function () { return container_service_1.ContainerService; } });
+__exportStar(require("./user/user.service"), exports);
+__exportStar(require("./products/container.service"), exports);
 __exportStar(require("./products/fragrance.service"), exports);
 __exportStar(require("./products/mood.service"), exports);
 __exportStar(require("./products/mood_fragrance.service"), exports);

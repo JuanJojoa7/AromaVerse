@@ -19,21 +19,18 @@ class ContainerController {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("container controller");
             try {
-                //Añadi esto como la validacion de la estructura de un contenedor
                 const containerData = req.body;
                 yield (0, middlewares_1.validateSchema)(container_schema_1.containerSchema)(req, res, () => { });
-                //Estas dos lineas de arriba son para validar la estructura de un contenedor
                 const newContainer = yield containerService.createContainer(req.body);
                 res.status(201).json(newContainer);
             }
             catch (error) {
-                //console.error('Error capturado en elm controlador:', error); // Log de depuración
-                if (error instanceof Error && error.message === 'container already exists') {
-                    res.status(400).json({ message: 'User already exists' });
-                    return;
+                if (error instanceof Error) {
+                    if (error.message === 'Name is required' || error.message === 'Material is required' || error.message === 'Description is required') {
+                        res.status(400).json({ message: error.message });
+                        return;
+                    }
                 }
-                //console.error('Error in method create:', error);
-                res.status(500).json({ message: 'Internal server errorrrrr', error });
             }
         });
     }
@@ -65,7 +62,6 @@ class ContainerController {
                     res.status(404).json({ message: 'Container not found' });
                     return;
                 }
-                res.status(500).json({ message: 'Internal server error', error });
             }
         });
     }

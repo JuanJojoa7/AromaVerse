@@ -51,6 +51,9 @@ class UserService {
                 if (!userExists) {
                     throw new exceptions_1.AuthError('User not found');
                 }
+                if (!(yield bcrypt_1.default.compare(userLogin.password, userExists.password))) {
+                    throw new exceptions_1.AuthError('Invalid password');
+                }
                 const token = this.generateToken(userExists.id, userExists.email, userExists.role);
                 return {
                     user: {
@@ -74,7 +77,7 @@ class UserService {
                 const userExists = yield this.findByEmail(UserInput.email);
                 if (userExists !== null) {
                     //console.error('User already existss');
-                    throw new Error('User already exists');
+                    throw new Error('User already exists:');
                 }
                 if (UserInput.password) {
                     UserInput.password = yield bcrypt_1.default.hash(UserInput.password, 10);

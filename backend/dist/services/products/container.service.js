@@ -26,7 +26,6 @@ class ContainerService {
                 return newContainer;
             }
             catch (error) {
-                console.error('Error al crear el contenedor:', error);
                 throw error;
             }
         });
