@@ -23,7 +23,7 @@ AromaVerse es una plataforma e-commerce para la venta de velas aromáticas. El p
 
 ### 🖥️ Clonar el repositorio
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/JuanJojoa7/AromaVerse.git
 cd AromaVerse
 ```
 
