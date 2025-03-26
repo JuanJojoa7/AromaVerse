@@ -13,32 +13,45 @@ Esto significa que todas las rutas de usuarios comienzan con `/users` y las de p
 
 ---
 
-## 🛠️ Tabla de Endpoints
+### **Tabla de Endpoints**
 
-| Método | Endpoint | Descripción |
-|--------|---------|-------------|
-| **POST** | `/users/` | Crea un nuevo usuario en la plataforma. |
-| **GET** | `/users/` | Obtiene la lista de todos los usuarios registrados. |
-| **DELETE** | `/users/{id}` | Elimina un usuario específico. |
-| **PUT** | `/users/{id}` | Modifica los datos de un usuario existente. |
-| **POST** | `/users/login` | Inicia sesión y devuelve un token JWT. |
-| **POST** | `/products/container` | Crea un nuevo envase para velas. |
-| **GET** | `/products/container` | Obtiene la lista de todos los envases. |
-| **DELETE** | `/products/container/{id}` | Elimina un envase específico. |
-| **POST** | `/products/fragrance` | Crea una nueva fragancia para velas. |
-| **GET** | `/products/fragrance` | Obtiene la lista de todas las fragancias. |
-| **POST** | `/products/mood` | Crea un nuevo estado de ánimo asociado a fragancias. |
-| **GET** | `/products/mood` | Obtiene la lista de estados de ánimo. |
-| **POST** | `/products/mood_fragrance` | Asocia un estado de ánimo con una fragancia. |
-| **DELETE** | `/products/mood_fragrance` | Desvincula una fragancia de un estado de ánimo. |
+| **Nombre del Endpoint**                          | **Método HTTP** | **URL**                                                       | **Descripción**                                                | **Parámetros Importantes**                                   |
+|-------------------------------------------------|-----------------|---------------------------------------------------------------|----------------------------------------------------------------|-------------------------------------------------------------|
+| **Crear usuario**                               | `POST`          | `https://aromaverse-yf4d.onrender.com/users/`                 | Crea un nuevo usuario en el sistema.                           | `{ "name": "string", "email": "string", "password": "string", "phone": "string", "address": "string" }` |
+| **Encontrar todos los usuarios**                | `GET`           | `https://aromaverse-yf4d.onrender.com/users/`                 | Obtiene una lista de todos los usuarios registrados.           | Ninguno                                                     |
+| **Borrar un usuario**                           | `DELETE`        | `https://aromaverse-yf4d.onrender.com/users/:id`              | Elimina un usuario específico por su ID.                       | `id` (ID del usuario a eliminar)                            |
+| **Actualizar un usuario**                       | `PUT`           | `https://aromaverse-yf4d.onrender.com/users/:id`              | Actualiza los datos de un usuario específico por su ID.        | `id` (ID del usuario), `{ "role": "string" }`              |
+| **Iniciar sesión (Login)**                      | `POST`          | `https://aromaverse-yf4d.onrender.com/users/login`            | Permite a un usuario iniciar sesión y obtener un token.        | `{ "email": "string", "password": "string" }`              |
+| **Crear contenedor**                            | `POST`          | `https://aromaverse-yf4d.onrender.com/products/container`     | Crea un nuevo contenedor para velas.                           | `{ "name": "string", "material": "string", "description": "string" }` |
+| **Obtener todos los contenedores**              | `GET`           | `https://aromaverse-yf4d.onrender.com/products/container`     | Obtiene la lista de todos los contenedores.                    | Ninguno                                                     |
+| **Eliminar un contenedor**                      | `DELETE`        | `https://aromaverse-yf4d.onrender.com/container/:id`          | Elimina un contenedor por su ID.                               | `id` (ID del contenedor a eliminar)                         |
+| **Actualizar un contenedor**                    | `PUT`           | `https://aromaverse-yf4d.onrender.com/products/container/:id` | Actualiza los datos de un contenedor por su ID.                | `id` (ID del contenedor), `{ "name": "string" }`           |
+| **Crear fragancia**                             | `POST`          | `https://aromaverse-yf4d.onrender.com/products/fragrance`     | Crea una nueva fragancia.                                      | `{ "name": "string", "description": "string", "associatedColor": "string" }` |
+| **Obtener todas las fragancias**                | `GET`           | `https://aromaverse-yf4d.onrender.com/products/fragrance`     | Obtiene la lista de todas las fragancias.                      | Ninguno                                                     |
+| **Eliminar una fragancia**                      | `DELETE`        | `https://aromaverse-yf4d.onrender.com/products/fragrance/:id` | Elimina una fragancia por su ID.                               | `id` (ID de la fragancia a eliminar)                        |
+| **Actualizar una fragancia**                    | `PUT`           | `https://aromaverse-yf4d.onrender.com/products/fragrance/:id` | Actualiza los datos de una fragancia por su ID.                | `id` (ID de la fragancia), `{ "description": "string" }`    |
+| **Crear estado de ánimo (Mood)**                | `POST`          | `https://aromaverse-yf4d.onrender.com/products/mood`          | Crea un nuevo estado de ánimo.                                 | `{ "name": "string", "description": "string" }`            |
+| **Obtener todos los estados de ánimo**          | `GET`           | `https://aromaverse-yf4d.onrender.com/products/mood`          | Obtiene la lista de todos los estados de ánimo.                | Ninguno                                                     |
+| **Eliminar un estado de ánimo**                 | `DELETE`        | `https://aromaverse-yf4d.onrender.com/products/mood/:id`      | Elimina un estado de ánimo por su ID.                          | `id` (ID del estado de ánimo a eliminar)                    |
+| **Actualizar un estado de ánimo**               | `PUT`           | `https://aromaverse-yf4d.onrender.com/products/mood/:id`      | Actualiza los datos de un estado de ánimo por su ID.           | `id` (ID del estado de ánimo), `{ "name": "string" }`      |
+| **Vincular estado de ánimo y fragancia**        | `POST`          | `https://aromaverse-yf4d.onrender.com/products/mood_fragrance` | Crea una relación entre un estado de ánimo y una fragancia.     | `{ "moodId": "number", "fragranceId": "number" }`          |
+| **Desvincular estado de ánimo y fragancia**     | `DELETE`        | `https://aromaverse-yf4d.onrender.com/products/unlink`       | Elimina la relación entre un estado de ánimo y una fragancia.  | `{ "moodId": "number", "fragranceId": "number" }`          |
+| **Obtener fragancias de un estado de ánimo**    | `GET`           | `https://aromaverse-yf4d.onrender.com/products/mood_fragrance/m/:id` | Obtiene todas las fragancias asociadas a un estado de ánimo. | `id` (ID del estado de ánimo)                              |
+| **Obtener estados de ánimo de una fragancia**   | `GET`           | `https://aromaverse-yf4d.onrender.com/products/mood_fragrance/f/:id` | Obtiene todos los estados de ánimo asociados a una fragancia.  | `id` (ID de la fragancia)                                  |
 
-## 📌 Notas
-- Todos los endpoints protegidos requieren un **token JWT** en el header `Authorization: Bearer <TOKEN>`.
-- Los códigos de estado estándar son:
-  - `200 OK`: Respuesta exitosa.
-  - `201 Created`: Recurso creado correctamente.
-  - `400 Bad Request`: Error en los datos enviados.
-  - `401 Unauthorized`: Falta de autenticación.
-  - `404 Not Found`: Recurso no encontrado.
-  - `500 Internal Server Error`: Error en el servidor.
+---
+
+### **Notas Adicionales**
+1. **Autenticación**:
+   - Algunos endpoints requieren un token de autenticación en el encabezado `Authorization: Bearer <TOKEN>`.
+
+2. **Códigos de Respuesta**:
+   - `200`: Operación exitosa.
+   - `201`: Recurso creado exitosamente.
+   - `400`: Error en los datos enviados por el cliente.
+   - `404`: Recurso no encontrado.
+   - `500`: Error interno del servidor.
+
+3. **Pruebas**:
+   - Los scripts de prueba en Postman verifican los códigos de estado, la estructura de las respuestas y los tiempos de respuesta.
 
