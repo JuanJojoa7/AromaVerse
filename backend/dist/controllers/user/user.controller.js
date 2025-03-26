@@ -64,9 +64,11 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const userId = parseInt(req.params.id, 10);
-                const loggedUser = req.body.loggedUser;
+                //const loggedUser = req.body.loggedUser;
                 const userInput = Object.assign({}, req.body);
+                console.log(userInput);
                 delete userInput.loggedUser;
+                console.log(userInput);
                 const updatedUser = yield userService.updateUser(userId, userInput);
                 //Elimino la contraseña del usuario actualizado
                 if (updatedUser.password) {
