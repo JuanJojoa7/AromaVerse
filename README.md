@@ -2,6 +2,11 @@
 
 AromaVerse es una plataforma e-commerce para la venta de velas aromáticas. El proyecto está desarrollado con Node.js en el backend y una base de datos PostgreSQL gestionada con Prisma ORM (En desarrollo).
 
+## Integrantes 👨‍💻
+* Felipe Rojas Prado - A00393918
+* Juan Felipe Jojoa Crespo - A00382042
+* Juan Sebastian Gonzalez - A00
+
 ## 🌍 URL del despliegue del proyecto
 
 [https://aromaverse-yf4d.onrender.com](https://aromaverse-yf4d.onrender.com)
