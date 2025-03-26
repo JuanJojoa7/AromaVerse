@@ -11,8 +11,11 @@ AromaVerse es una plataforma e-commerce para la venta de velas aromáticas. El p
 ## Documentacion Base De Datos 🪪
 [📄 Documentación del Modelado de Datos](docs/ModeladoDatos.md)
 
-## Postman Con Pruebas JSON
+## Postman Con Pruebas JSON 💊
 [🧪 Pruebas Postman](docs/Resources/AromaVerse.postman_collection.json)
+
+## Endpoints del proyecto ✅
+[✅ Endpoints](docs/Resources/Endpoints.md)
 
 ## 🚀 Tecnologías
 
