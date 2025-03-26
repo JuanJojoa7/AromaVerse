@@ -20,7 +20,17 @@ AromaVerse es una plataforma e-commerce para la venta de velas aromáticas. El p
 [🧪 Pruebas Postman](docs/Resources/AromaVerse.postman_collection.json)
 
 ## Endpoints del proyecto ✅
-[✅ Endpoints](docs/Endpoints.md)
+[✅ Endpoints](docs/Endpoints.md) 
+
+---
+
+## Dificultades Encontradas  
+
+Durante el desarrollo y despliegue del proyecto, enfrentamos algunos desafíos técnicos. Uno de los principales problemas fue que el endpoint `PUT /user` no funciona correctamente en el entorno de producción, aunque sí lo hace de manera local. Este es el único endpoint con este comportamiento, por lo que seguimos investigando la causa del problema.  
+
+Además, tuvimos dificultades al desplegar en Render, ya que inicialmente encontramos errores relacionados con la configuración y la carga de archivos sensibles. Finalmente, logramos completar el despliegue tras varias pruebas y ajustes. Es importante tener en cuenta qué archivos deben subirse y cuáles deben excluirse para evitar errores en futuras implementaciones.  
+
+---
 
 ## 🚀 Tecnologías
 
