@@ -1,10 +1,10 @@
 ### 📊 Diagrama Logico y Relacional
 
 #### 📌 Diagrama Lógico
-![Diagrama Lógico](docs/Resources/Logical.png)
+![Diagrama Lógico](Resources/Logical.png)
 
 #### 📌 Modelo Relacional
-![Modelo Relacional](docs/Resources/ModeloRelacional.png)
+![Modelo Relacional](Resources/ModeloRelacional.png)
 
 # Modelo de Datos
 
