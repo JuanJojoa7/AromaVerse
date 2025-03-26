@@ -51,13 +51,15 @@ export class UserController {
   public async updateUser(req: Request, res: Response): Promise<void>{
     try {
       const userId = parseInt(req.params.id, 10);
-      const loggedUser = req.body.loggedUser;
+      //const loggedUser = req.body.loggedUser;
       const userInput = { ...req.body}
       
-
+      console.log(userInput);
       delete userInput.loggedUser;
-
+      console.log(userInput);
+      
       const updatedUser = await userService.updateUser(userId, userInput);
+      
 
       //Elimino la contraseña del usuario actualizado
       if(updatedUser.password){
