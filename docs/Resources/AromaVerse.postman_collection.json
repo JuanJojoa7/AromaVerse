@@ -1,0 +1,1348 @@
+{
+	"info": {
+		"_postman_id": "d2b6f775-7c3d-440a-b68b-422edfc6de8f",
+		"name": "AromaVerse",
+		"description": "Proyecto de computación en internet 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38727608",
+		"_collection_link": "https://compunet-3.postman.co/workspace/Team-Workspace~f14534d5-650b-4a42-8499-c4631f35c375/collection/38727608-d2b6f775-7c3d-440a-b68b-422edfc6de8f?action=share&source=collection_link&creator=38727608"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Crear usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Validar que se ingrewsen los datos adecuados\r",
+									"pm.test(\"Response contains user object\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.equal(\"david\");\r",
+									"    pm.expect(jsonData.email).to.equal(\"david@example.com\");\r",
+									"    pm.expect(jsonData.phone).to.equal(\"1234567890\");\r",
+									"    pm.expect(jsonData.address).to.equal(\"123 Main St\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"david\",\r\n  \"email\": \"david@example.com\",\r\n  \"password\": \"david123\",\r\n  \"phone\": \"1234567890\",\r\n  \"address\": \"123 Main St\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aromaverse-yf4d.onrender.com/users/",
+							"protocol": "https",
+							"host": [
+								"aromaverse-yf4d",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Encontrar todos los usuarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for verifying the response body is an array\r",
+									"pm.test(\"Verify response body is an array\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"// Test for verifying the presence of specific fields in each user object\r",
+									"pm.test(\"Verify the presence of specific fields in each user object\", function () {\r",
+									"    pm.response.json().forEach(function (user) {\r",
+									"        pm.expect(user).to.have.property('id');\r",
+									"        pm.expect(user).to.have.property('name');\r",
+									"        pm.expect(user).to.have.property('email');\r",
+									"        pm.expect(user).to.have.property('password');\r",
+									"        pm.expect(user).to.have.property('phone');\r",
+									"        pm.expect(user).to.have.property('address');\r",
+									"        pm.expect(user).to.have.property('registrationDate');\r",
+									"        pm.expect(user).to.have.property('role');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "inherit"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://aromaverse-yf4d.onrender.com/users/",
+							"protocol": "https",
+							"host": [
+								"aromaverse-yf4d",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/users",
+					"request": {
+						"auth": {
+							"type": "inherit"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Felipe\",\r\n  \"email\": \"Felipe@example.com\",\r\n  \"password\": \"securepassword123\",\r\n  \"phone\": \"0987654321\",\r\n  \"address\": \"124 Main St\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar un usuario",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 50ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(50);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deleted user ID is correct\", function(){\r",
+									"    pm.expect(pm.response.json().id).to.equal(4);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjg2MjYwNCwiZXhwIjoxNzQyODY1NjA0fQ.Lyd24sVHMGQXGZJkNZ-w7UdYC5ZGUk6cWOrzlhpg2mA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://aromaverse-yf4d.onrender.com/users/4",
+							"protocol": "https",
+							"host": [
+								"aromaverse-yf4d",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar un usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for verifying the updated role in the response body after the PUT request\r",
+									"pm.test(\"Verify updated role in the response body\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.role).to.equal(\"admin\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MDA5NCwiZXhwIjoxNzQyOTUzMDk0fQ.9ur_avhgDCHTZ0hwhOKyAJTGfWs2o8Rw3Khn_gY1IK8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aromaverse-yf4d.onrender.com/users/2",
+							"protocol": "https",
+							"host": [
+								"aromaverse-yf4d",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "http://localhost:3000/users/login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has user object with id, name, email, and role properties\", function () {\r",
+									"  pm.expect(pm.response.json().user).to.have.property('id');\r",
+									"  pm.expect(pm.response.json().user).to.have.property('name');\r",
+									"  pm.expect(pm.response.json().user).to.have.property('email');\r",
+									"  pm.expect(pm.response.json().user).to.have.property('role');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has a token property\", function () {\r",
+									"  pm.expect(pm.response.json()).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"// Test to check that the user object properties are of the correct type\r",
+									"pm.test(\"User object properties have the correct data types\", function () {\r",
+									"    var user = pm.response.json().user;\r",
+									"    pm.expect(user.id).to.be.a('number');\r",
+									"    pm.expect(user.name).to.be.a('string');\r",
+									"    pm.expect(user.email).to.be.a('string');\r",
+									"    pm.expect(user.role).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"// Test to check that the token property is a string\r",
+									"pm.test(\"Token property is a string\", function () {\r",
+									"    pm.expect(pm.response.json().token).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Test to check if the token is above certain leght\r",
+									"pm.test(\"Token length is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.token.length).to.be.above(100); \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aromaverse-yf4d.onrender.com/users/login",
+							"protocol": "https",
+							"host": [
+								"aromaverse-yf4d",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Containers",
+					"item": [
+						{
+							"name": "Create Container",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function(){\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"// Check if the response body contains the expected container name\r",
+											"pm.test(\"Verify the container name in the response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.equal(\"Envase rectangular\");\r",
+											"    pm.expect(jsonData.material).to.equal(\"Barro\");\r",
+											"    pm.expect(jsonData.description).to.equal(\"7 cm de diámetro x 8 cm de alto (~250 ml / 8 oz)\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MTkyNCwiZXhwIjoxNzQyOTU0OTI0fQ.tgLi38bN5THSyjsNSSqhRhciH7Ct-L-RsV1pFaRYGps",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Envase rectangular\",\r\n  \"material\": \"Barro\",\r\n  \"description\": \"7 cm de diámetro x 8 cm de alto (~250 ml / 8 oz)\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/container",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"container"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll Containers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"// Test for verifying the presence of specific fields in each user object\r",
+											"pm.test(\"Verify the presence of specific fields in each container object\", function () {\r",
+											"    pm.response.json().forEach(function (container) {\r",
+											"        pm.expect(container).to.have.property('id');\r",
+											"        pm.expect(container).to.have.property('name');\r",
+											"        pm.expect(container).to.have.property('material')\r",
+											"        pm.expect(container).to.have.property('description')\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MjU5OCwiZXhwIjoxNzQyOTU1NTk4fQ.SCXnVjFXVL8XdbWHf9e3vNZOZN4M2S8xqewZ3FnwhCo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/container",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"container"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Container",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 50ms\", function(){\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(50);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Deleted user ID is correct\", function(){\r",
+											"    pm.expect(pm.response.json().id).to.equal(2);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MTkyNCwiZXhwIjoxNzQyOTU0OTI0fQ.tgLi38bN5THSyjsNSSqhRhciH7Ct-L-RsV1pFaRYGps",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/container/2",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"container",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Containers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"// Test for verifying the updated name in the response body after the PUT request\r",
+											"pm.test(\"Verify updated name in the response body\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.equal(\"Envase hexagonal\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MzIwNSwiZXhwIjoxNzQyOTU2MjA1fQ.ZoYkhsY7-8rF22E5XoWP-IczCF5qrOAJFn1vXn_ZRhs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Envase tringular\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/container/2",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"container",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fragrance",
+					"item": [
+						{
+							"name": "Create Fragrance",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function(){\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"// Check if the response body contains the expected fragrance name\r",
+											"pm.test(\"Verify the fragrance name in the response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.equal(\"Limon\");\r",
+											"    pm.expect(jsonData.description).to.equal(\"Suave Essencia de Limon\");\r",
+											"    pm.expect(jsonData.associatedColor).to.equal(\"Verde Claro\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MjU5OCwiZXhwIjoxNzQyOTU1NTk4fQ.SCXnVjFXVL8XdbWHf9e3vNZOZN4M2S8xqewZ3FnwhCo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Limon\",\r\n  \"description\": \"Suave Essencia de Limon\",\r\n  \"associatedColor\": \"Verde Claro\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/fragrance",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"fragrance"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Fragrance",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"// Test for verifying the presence of specific fields in each user object\r",
+											"pm.test(\"Verify the presence of specific fields in each fragrance object\", function () {\r",
+											"    pm.response.json().forEach(function (fragrance) {\r",
+											"        pm.expect(fragrance).to.have.property('id');\r",
+											"        pm.expect(fragrance).to.have.property('name');\r",
+											"        pm.expect(fragrance).to.have.property('description')\r",
+											"        pm.expect(fragrance).to.have.property('associatedColor')\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MjU5OCwiZXhwIjoxNzQyOTU1NTk4fQ.SCXnVjFXVL8XdbWHf9e3vNZOZN4M2S8xqewZ3FnwhCo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/fragrance",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"fragrance"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Fragrance",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 50ms\", function(){\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(350);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Deleted user ID is correct\", function(){\r",
+											"    pm.expect(pm.response.json().id).to.equal(2);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MjU5OCwiZXhwIjoxNzQyOTU1NTk4fQ.SCXnVjFXVL8XdbWHf9e3vNZOZN4M2S8xqewZ3FnwhCo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/fragrance/2",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"fragrance",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Fragrance",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"// Test for verifying the updated name in the response body after the PUT request\r",
+											"pm.test(\"Verify updated name in the response body\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.equal(\"Limon y Sal\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MjU5OCwiZXhwIjoxNzQyOTU1NTk4fQ.SCXnVjFXVL8XdbWHf9e3vNZOZN4M2S8xqewZ3FnwhCo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"Limon y sal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/fragrance/3",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"fragrance",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Mood",
+					"item": [
+						{
+							"name": "Create Mood",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function(){\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"// Check if the response body contains the expected mood name\r",
+											"pm.test(\"Verify the mood name in the response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.equal(\"Chilled\");\r",
+											"    pm.expect(jsonData.description).to.equal(\"very relaxed or easy-going\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MzQxMCwiZXhwIjoxNzQyOTU2NDEwfQ.sxsHz2kVGcjFSlibIrTnTW2TQDkqnPRUEYNc1XDlnFU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Chilled\",\r\n    \"description\": \"very relaxed or easy-going\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/mood",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"mood"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Mood",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"// Test for verifying the presence of specific fields in each user object\r",
+											"pm.test(\"Verify the presence of specific fields in each container object\", function () {\r",
+											"    pm.response.json().forEach(function (mood) {\r",
+											"        pm.expect(mood).to.have.property('id');\r",
+											"        pm.expect(mood).to.have.property('name');\r",
+											"        pm.expect(mood).to.have.property('description')\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MzQxMCwiZXhwIjoxNzQyOTU2NDEwfQ.sxsHz2kVGcjFSlibIrTnTW2TQDkqnPRUEYNc1XDlnFU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/mood",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"mood"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Mood",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 50ms\", function(){\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(550);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Deleted user ID is correct\", function(){\r",
+											"    pm.expect(pm.response.json().id).to.equal(3);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MzQxMCwiZXhwIjoxNzQyOTU2NDEwfQ.sxsHz2kVGcjFSlibIrTnTW2TQDkqnPRUEYNc1XDlnFU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/mood/3",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"mood",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Mood",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"// Test for verifying the updated name in the response body after the PUT request\r",
+											"pm.test(\"Verify updated name in the response body\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.equal(\"Chilly\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MzQxMCwiZXhwIjoxNzQyOTU2NDEwfQ.sxsHz2kVGcjFSlibIrTnTW2TQDkqnPRUEYNc1XDlnFU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Chilled\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/mood/1",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"mood",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Mood_Fragrance",
+					"item": [
+						{
+							"name": "Link mood-fragrance",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function(){\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"// Check if the response body contains the expected links\r",
+											"pm.test(\"Verify the links in the response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.moodId).to.equal(1);\r",
+											"    pm.expect(jsonData.fragranceId).to.equal(1);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MzQxMCwiZXhwIjoxNzQyOTU2NDEwfQ.sxsHz2kVGcjFSlibIrTnTW2TQDkqnPRUEYNc1XDlnFU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"moodId\" : 1,\r\n    \"fragranceId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/mood_fragrance",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"mood_fragrance"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unlink mood-fragrance",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 50ms\", function(){\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(50);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Unlink is correct\", function(){\r",
+											"    pm.expect(pm.response.json().id).to.equal(1);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MzQxMCwiZXhwIjoxNzQyOTU2NDEwfQ.sxsHz2kVGcjFSlibIrTnTW2TQDkqnPRUEYNc1XDlnFU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"moodId\" : 1,\r\n    \"fragranceId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/unlink",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"unlink"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Fragrance Moods",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"// Test for verifying the presence of specific fields in each user object\r",
+											"pm.test(\"Verify the presence of specific fields in each container object\", function () {\r",
+											"    pm.response.json().forEach(function (mood_fragrance) {\r",
+											"        pm.expect(mood_fragrance).to.have.property('id');\r",
+											"        pm.expect(mood_fragrance).to.have.property('name');\r",
+											"        pm.expect(mood_fragrance).to.have.property('description')\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MzQxMCwiZXhwIjoxNzQyOTU2NDEwfQ.sxsHz2kVGcjFSlibIrTnTW2TQDkqnPRUEYNc1XDlnFU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/mood_fragrance/f/3",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"mood_fragrance",
+										"f",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Mood Fragrances",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"// Test for verifying the presence of specific fields in each user object\r",
+											"pm.test(\"Verify the presence of specific fields in each container object\", function () {\r",
+											"    pm.response.json().forEach(function (mood_fragrance) {\r",
+											"        pm.expect(mood_fragrance).to.have.property('id');\r",
+											"        pm.expect(mood_fragrance).to.have.property('name');\r",
+											"        pm.expect(mood_fragrance).to.have.property('description')\r",
+											"        pm.expect(mood_fragrance).to.have.property('associatedColor')\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc0Mjk1MzQxMCwiZXhwIjoxNzQyOTU2NDEwfQ.sxsHz2kVGcjFSlibIrTnTW2TQDkqnPRUEYNc1XDlnFU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://aromaverse-yf4d.onrender.com/products/mood_fragrance/m/1",
+									"protocol": "https",
+									"host": [
+										"aromaverse-yf4d",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"products",
+										"mood_fragrance",
+										"m",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
