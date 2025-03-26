@@ -43,10 +43,10 @@ chmod +x setup.sh
 #### ⚠️ Ajustes adicionales:
 Cuando estén ejecutando `./setup.sh`, llegarán a una parte donde se pregunta por Jest. Esto es para el funcionamiento de las pruebas de unidad. Simplemente seleccionen "No" cuando pregunte si desean sobrescribir `jest.config.ts`, ya que este archivo estará en el repositorio y se usará para verificar la cobertura de pruebas del proyecto.
 
-#### Configurar las variables de entorno:
+#### Configurar las variables de entorno (Si desea ejecutar el proyecto localmente):
 Crear un archivo `.env` en `backend/` con:
 ```ini
-DATABASE_URL=postgresql://usuario:password@localhost:5432/AromaLife
+DATABASE_URL=postgresql://usuario:password@localhost:5432/AromaLife (Debe inicializar una base de datos localmente Postgre y reemplazar usuario y password)
 PORT=3000
 JWT_SECRET="Secret"
 ```
