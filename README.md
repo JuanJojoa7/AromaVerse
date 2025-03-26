@@ -5,7 +5,7 @@ AromaVerse es una plataforma e-commerce para la venta de velas aromáticas. El p
 ## Integrantes 👨‍💻
 * Felipe Rojas Prado - A00393918
 * Juan Felipe Jojoa Crespo - A00382042
-* Juan Sebastian Gonzalez - A00
+* Juan Sebastian Gonzalez - A00371810
 
 ## 🌍 URL del despliegue del proyecto
 
