@@ -81,16 +81,6 @@ yarn run dev
 ```bash
 yarn test
 ```
-
-## 🛠 Endpoints principales
-
-| Método | Endpoint | Descripción |
-|---------|-------------|------------------------------|
-| POST | `/api/auth/login` | Iniciar sesión con Firebase |
-| POST | `/api/auth/register` | Registrar usuario |
-| GET  | `/api/products` | Obtener lista de productos |
-| POST | `/api/orders` | Crear una orden de compra |
-
 ---
 
 📌 **© 2025 AromaVerse - Todos los derechos reservados.**
