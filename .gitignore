@@ -1,32 +1,5 @@
 # Node.js dependencies
 node_modules/
-npm-debug.log
-yarn-error.log
 
 # Environment variables
 .env
-
-# Prisma
-prisma/.env
-prisma/migrations/
-
-# Logs
-logs/
-*.log
-
-# Database files
-*.sqlite
-*.sqlite-journal
-
-# Firebase
-.firebase/
-serviceAccountKey.json
-
-# Build files
-coverage/
-
-# IDE and OS files
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
