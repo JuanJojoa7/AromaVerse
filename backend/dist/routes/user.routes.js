@@ -18,7 +18,7 @@ userRouter.get('/', (req, res) => userController.getAllUsers(req, res));
 //Eliminar un usuario por ID
 userRouter.delete('/:id', middlewares_2.auth, (0, middlewares_1.authorizeRole)(['admin']), (req, res) => userController.deleteUser(req, res));
 //Actualizar un usuario por ID
-userRouter.put('/:id', middlewares_2.auth, (0, middlewares_1.authorizeRole)(['admin']), (req, res) => userController.updateUser(req, res));
+userRouter.put('/:id', middlewares_2.auth, (0, middlewares_1.authorizeRole)(['admin', 'customer']), (req, res) => userController.updateUser(req, res));
 //Login
 userRouter.post('/login', (0, middlewares_3.validateSchema)(schemas_1.userLoginSchema), (req, res) => userController.login(req, res));
 exports.default = userRouter;

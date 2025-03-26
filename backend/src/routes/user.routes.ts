@@ -18,7 +18,7 @@ userRouter.get('/', (req, res)=> userController.getAllUsers(req, res));
 userRouter.delete('/:id',auth, authorizeRole(['admin']), (req, res)=> userController.deleteUser(req, res));
 
 //Actualizar un usuario por ID
-userRouter.put('/:id',auth, authorizeRole(['admin']), (req, res)=> userController.updateUser(req, res));
+userRouter.put('/:id',auth, authorizeRole(['admin', 'customer']), (req, res)=> userController.updateUser(req, res));
 
 //Login
 userRouter.post('/login', validateSchema(userLoginSchema), (req, res) => userController.login(req, res));
